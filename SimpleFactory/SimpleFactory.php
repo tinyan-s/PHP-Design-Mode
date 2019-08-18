@@ -4,18 +4,14 @@
  * Operation 计算器基类
  * 
  */
-class Operation {
-    private $x;
-    private $y;
-    function getResult($x, $y){
-        return 0;
-    }
+interface Operation {
+    function getResult($x, $y);
 }
 
 /**
  * AddOperation 加法类
  */
-class AddOperation extends Operation {
+class AddOperation implements Operation {
     function getResult($x, $y){
         return $x + $y; 
     }
@@ -24,7 +20,7 @@ class AddOperation extends Operation {
 /**
  * PlugOperation 乘法类
  */
-class PlugOperation extends Operation {
+class PlugOperation implements Operation {
     function getResult($x, $y){
         return $x * $y; 
     }
@@ -34,7 +30,7 @@ class PlugOperation extends Operation {
  * SubOperation 减法类
  * 
  */
-class SubOperation extends Operation {
+class SubOperation implements Operation {
     function getResult($x, $y){
         return $x - $y;
     }
@@ -43,7 +39,7 @@ class SubOperation extends Operation {
 /**
  * DivOperation 除法类
  */
-class DivOperation extends Operation {
+class DivOperation implements Operation {
     function getResult($x, $y){
         if($y == 0){
             return 0;
@@ -83,7 +79,7 @@ class OperationFactory {
  * client 控制台客户端
  */
 class Client {
-    function run(){
+    static function run(){
         $subOperation = OperationFactory::createOperation('-');
         var_dump($subOperation->getResult(5, 2));
         $addOperation = OperationFactory::createOperation('+');
@@ -92,6 +88,6 @@ class Client {
     }
 }
 
-$client = new Client();
-$client->run();
+// 5 -  2 ， 5 + 2
+Client::run();
 ?>
